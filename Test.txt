@@ -1,0 +1,113 @@
+--select empno, ename, lower(job), deptno from emp where lower(ename) = 'scott';
+--
+--select empno, ename, job, deptno from emp where upper(ename) = 'scott';
+--
+--select deptno, initcap(dname), initcap(loc) from dept;
+--
+--select empno, ename, job, concat(empno,ename) e_name, concat(ename,job) e_job from emp where deptno = '10';
+--select deptno no, dname, loc, concat(deptno, dname) d_name, concat(dname,deptno) d_deptno, concat(dname,loc) d_loc from dept;
+--
+--select empno, ename, job, sal, deptno from emp
+--where substr(ename,1,1) > 'K' and substr(ename,1,1) < 'Y' order by ename;
+--
+--select ename, instr(ename,'L') e_null, instr(ename,'L',1,1) e_11,
+--    instr(ename,'L',1,2) e_12, instr(ename,'L',4,1) e_41,
+--    instr(ename,'L',4,2) e_42
+--from emp order by ename;
+--
+--select ename, lpad(ename, 15,'*'), sal, lpad(sal,10,'*') from emp where deptno = '10';
+--select deptno, dname, lpad(dname,20,'*') from dept;
+--
+--select deptno, dname, rpad(dname, 20, '*') from dept;
+--
+--select ltrim(job, 'A'), ltrim(sal, 1) from emp;
+--
+--select rtrim(job, 'K') from emp where deptno = '10';
+--
+--select empno, ename, translate(ename, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') u_lower, sal, translate(sal, 1234567890, '일이삼사오육칠팔구영') n_h from emp;
+--select replace(job, 'A', '$') from emp;
+--select round(4567.678), round(4567.678,0), round(4567.678,2), round(4567.678,-2) from dual;
+--select trunc(4567.678), trunc(4567.678,0), trunc(4567.678,2), trunc(4567.678,-2) from dual;
+--select sal, mod(sal,30) from emp where deptno='10';
+--select empno, ename, job, ename||chr(10)||job enamejob from emp where deptno='20'; 
+
+--select ename, hiredate, sysdate, sysdate-hiredate totalDays, trunc((sysdate-hiredate)/7) week, round(mod((sysdate-hiredate),7),0) days from emp order by sysdate-hiredate desc;
+--select ename, hiredate, sysdate, months_between(sysdate,hiredate) m_between, trunc(months_between(sysdate, hiredate),0) t_between from emp order by months_between(sysdate, hiredate) desc;
+--select ename, hiredate, next_day(hiredate, 5) n_day, next_day(hiredate, 6) n_6, next_day(hiredate, 7) n_7 from emp where deptno=10 order by hiredate desc;  
+--select empno, ename, hiredate, last_day(hiredate), last_day(hiredate)-hiredate from emp order by last_day(hiredate) - hiredate desc;
+--select ename, hiredate, ROUND(hiredate, 'MONTH'), trunc(hiredate, 'MONTH'), ROUND(hiredate, 'year'), trunc(hiredate, 'year') from emp where deptno='10';
+--select ename, hiredate, to_char(hiredate, 'fmdd Month yyyy'), to_char(hiredate, 'yyyy"년 "mm"월 "dd"일"') from emp where deptno=10;
+--select empno, ename, job, sal, to_char(sal, '$999,999') from emp where deptno=20 order by sal desc;
+--select ename, job, hiredate, to_char(hiredate,'yyyymmdd') from emp where to_char(hiredate,'yyyymmdd') = to_date('19810222');
+--select ename, job, hiredate, to_char(hiredate,'yyyymmdd') from emp where hiredate = to_date('2월 22, 1981', 'month dd, yyyy');
+--alter session set nls_date_format = 'yyyy-mm-dd hh:mi:ss sssss am';
+--select sysdate, sysdate + to_yminterval('01-03') as "1년 3개월 뒤", sysdate - to_yminterval('01-03') as "1년 3개월 전" from dual;
+--select sysdate, sysdate + to_dsinterval('007 14:30:00') as "7일 14시 30분 뒤", sysdate - to_dsinterval('040 00:00:00') as "40일 이전" from dual;
+--select sysdate, sysdate + to_yminterval('01-03') + to_dsinterval('020 00:00:00') as "1년 3개월 20일 이후" from dual;
+--select sysdate, extract(year from sysdate) 년, extract(month from sysdate) 월,  extract(day from sysdate) 일 from dual;
+--select empno, ename, job, sal, decode(job, 'ANALYST', sal*1.1, 'CLERK',sal*1.15, 'MANAGER',sal*1.2, sal) d_sal from emp order by sal desc;
+--select empno, ename, sal, rank() over(order by sal desc) "전체등수", rank() over(partition by deptno order by sal desc) "부서별등수",
+--select dense_rank() over(order by sal desc) "전체등수", dense_rank() over(partition by deptno order by sal desc) "부서별등수" from emp;
+--select deptno, dname, rtrim(dname), rpad(dname, 20, '*') t_rpad, rpad(rtrim(dname), 20,'*') r_r, loc from dept;
+
+--4장 연습문제
+--select sysdate from dual;
+--select empno, ename, job, sal, sal*1.15 new_salary, sal*0.15 increase from emp;
+--select ename, hiredate, next_day(add_months(hiredate, 6),2) from emp;
+--select ename, hiredate, months_between(sysdate, hiredate) 입사일, sal, sal*months_between(sysdate, hiredate) from emp;
+--select ename||' earns'||to_char(sal,'$999,999.999')||' monthly but wants '||to_char(sal*3,'$999,999.999') Dream_salary from emp;
+--select ename, sal, lpad(sal, 15, '*') from emp;
+--select ename, job, hiredate, to_char(hiredate, 'day') from emp;
+--select ename, length(ename), job from emp where length(ename) >= 6;
+-- 끝
+select * from emp;
+select job, avg(sal), max(sal), min(sal), sum(sal) from emp where job like 'SAL%' group by job;
+select min(ename), max(ename), min(hiredate), max(hiredate), min(sal), max(sal) from emp;
+select count(*) as c_people, count(comm), avg(nvl(comm,0)) as a_n_comm, count(deptno), count(distinct deptno) from emp;
+select deptno, count(deptno), avg(sal), min(sal), max(sal), sum(sal) from emp group by deptno;
+select count(deptno), avg(sal),  min(sal), max(sal), sum(sal) from emp group by deptno order by sum(sal) desc;
+select deptno, job, count(*), avg(sal), sum(sal) from emp group by deptno, job;
+select deptno, job, count(*), avg(sal), sum(sal) from emp group by job, deptno;
+select deptno, count(*), sum(sal) from emp group by deptno having count(*) > 4;
+select deptno, avg(sal), sum(sal) from emp group by deptno having sum(sal) > 2900;
+select deptno, avg(sal), sum(sal) from emp group by deptno having max(sal) > 2900;
+select job, avg(sal), sum(sal) from emp group by job having avg(sal) >= 3000;
+select job, sum(sal) from emp 
+where job not like 'SAL%' 
+group by job 
+having sum(sal) > 5000 
+order by sum(sal) desc;
+select 
+    max(avg(sal)), 
+    max(sum(sal)), 
+    min(min(sal)), 
+    max(max(sal)) 
+from emp group by deptno;
+
+-- 5장 연습문제
+select count(*), max(sal), min(sal), sum(sal) from emp;
+select max(sal), min(sal), sum(sal) from emp group by deptno;
+select job, count(*) from emp group by job;
+select max(sal)-min(sal) from emp;
+select to_char(hiredate, 'yy') as H_year, count(*), min(sal), max(sal), avg(sal), sum(sal) from emp group by to_char(hiredate, 'yy') order by to_char(hiredate, 'yy');
+select sum(count(hiredate)) total, 
+    sum(case extract(year from hiredate) when 1980 then count(*) else 0 end) "1980",
+    sum(case extract(year from hiredate) when 1981 then count(*) else 0 end) "1981",
+    sum(case extract(year from hiredate) when 1982 then count(*) else 0 end) "1982",
+    sum(case extract(year from hiredate) when 1987 then count(*) else 0 end) "1987" 
+from emp group by hiredate;
+
+select job, 
+sum(case deptno when 10 then sal end) deptno10 ,
+sum(case deptno when 20 then sal end) deptno20 ,
+sum(case deptno when 30 then sal end) deptno30 ,
+sum(sal) total
+from emp group by job ;
+
+select * from emp;
+    
+
+    
+-- select job, deptno, sal from emp group by job, deptno, sal having job = 'ANALYST'
+-- group by to_char(hiredate,'yyyy');
+--group by to_char(hiredate,'yyyy'c having to_char(hiredate,'yyyy') = '1981';
